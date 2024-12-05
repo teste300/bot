@@ -25,14 +25,13 @@ def enviar_opcoes(mensagem):
     button_2 = InlineKeyboardButton("Como denunciar?", callback_data="como_denunciar")
     button_3 = InlineKeyboardButton("Sinais de abuso", callback_data="sinais_abuso")
     button_4 = InlineKeyboardButton("Onde buscar ajuda?", callback_data="onde_buscar_ajuda")
-    button_5 = InlineKeyboardButton("Assistir vídeo sobre abuso sexual", callback_data="assistir_video")
     button_6 = InlineKeyboardButton("Prevenção ao abuso sexual", callback_data="prevencao_abuso")
     button_7 = InlineKeyboardButton("Consequências do abuso sexual", callback_data="consequencias_abuso")
-    button_8 = InlineKeyboardButton("Como proteger crianças e adolescentes", callback_data="protecao_criancas")
+    button_8 = InlineKeyboardButton("Como proteger os adolescentes", callback_data="protecao_criancas")
     button_9 = InlineKeyboardButton("Outras dúvidas", callback_data="outras_duvidas")
     
     # Adiciona os botões ao teclado
-    keyboard.add(button_1, button_2, button_3, button_4, button_5, button_6, button_7, button_8, button_9)
+    keyboard.add(button_1, button_2, button_3, button_4, button_6, button_7, button_8, button_9)
 
     # Envia a mensagem com as opções de ajuda
     bot.send_message(mensagem.chat.id, welcome_message, reply_markup=keyboard)
@@ -100,23 +99,19 @@ def callback_inline(call):
     elif call.data == "sinais_abuso":
         response = "Os sinais de abuso sexual podem incluir:\n- Mudanças bruscas de comportamento (isolamento, medo).\n- Dores ou ferimentos inexplicáveis.\n- Relutância em estar perto de certas pessoas.\n- Entre outros comportamentos incomuns."
     elif call.data == "onde_buscar_ajuda":
-        response = "Você pode buscar ajuda em:\n- Delegacias especializadas (como Delegacias da Mulher).\n- Centros de atendimento psicossocial (CAPS).\n- ONGs e instituições de apoio às vítimas.\n- Redes de apoio locais, como amigos ou familiares confiáveis."
-    elif call.data == "assistir_video":
-        # Link do vídeo no YouTube
-        video_url = "https://youtu.be/G66gPz02Nl4?si=smKA-J5Q2aSmpM5e"
-        response = "Aqui está o vídeo com informações úteis sobre abuso sexual: " + video_url  # Envia o link como texto
-        bot.send_message(call.message.chat.id, response)  # Envia o link do vídeo como mensagem de texto
-
-        # Adiciona uma pausa de 2 segundos antes de enviar as opções
-        time.sleep(2)
-        enviar_opcoes_continuar_ou_encerrar(call.message)
-        return  # Evita enviar outra mensagem após esta
+        response = (
+            "Você pode buscar ajuda em:\n"
+            "- Delegacias especializadas (como Delegacias da Mulher).\n"
+            "- Centros de atendimento psicossocial (CAPS).\n"
+            "- ONGs e instituições de apoio às vítimas.\n"
+            "- Redes de apoio locais, como amigos ou familiares confiáveis."
+        )
     elif call.data == "prevencao_abuso":
         response = "A prevenção ao abuso sexual envolve a educação sobre o corpo, respeito ao outro e limites. Encorajamento de um ambiente seguro e a promoção de relacionamentos respeitosos são fundamentais."
     elif call.data == "consequencias_abuso":
         response = "As consequências do abuso sexual podem incluir traumas psicológicos duradouros, danos físicos, sentimentos de vergonha e culpa, além de problemas de confiança e relações interpessoais."
     elif call.data == "protecao_criancas":
-        response = "Proteger crianças e adolescentes envolve educá-los sobre limites pessoais, ensinar como identificar comportamentos inadequados e garantir um ambiente seguro e saudável."
+        response = "Proteger os adolescentes envolve educá-los sobre limites pessoais, ensinar como identificar comportamentos inadequados e garantir um ambiente seguro e saudável."
 
     # Envia a resposta em uma nova mensagem (se houver uma resposta válida)
     if response:
@@ -139,4 +134,6 @@ def callback_inline(call):
         enviar_opcoes(call.message)
 
 # Inicia o bot
-bot.polling() 
+bot.polling()
+
+
